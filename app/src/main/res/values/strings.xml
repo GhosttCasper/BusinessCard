@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Business Card</string>
+    <string name="full_name">Ghost Casper</string>
+    <string name="title">Android Developer Extraordinaire</string>
+    <string name="link">\@GhosttCasper</string>
+    <string name="email">v.laptev1998@gmail.com</string>
+    <string name="phone_number">+972 58 796 9209</string>
+</resources>
