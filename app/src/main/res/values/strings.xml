@@ -5,4 +5,8 @@
     <string name="link">\@GhosttCasper</string>
     <string name="email">my.gmail2026@gmail.com</string>
     <string name="phone_number">+999 88 777 6655</string>
+    <string name="phone">Phone</string>
+    <string name="social">Social profile</string>
+    <string name="email_label">Email</string>
+
 </resources>

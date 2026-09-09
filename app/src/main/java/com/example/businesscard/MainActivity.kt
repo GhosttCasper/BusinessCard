@@ -25,6 +25,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -47,10 +48,9 @@ class MainActivity : ComponentActivity() {
 
 
 @Composable
-fun BusinessCard(modifier: Modifier = Modifier) {
+private fun BusinessCard(modifier: Modifier = Modifier) {
     Column(
         modifier = modifier
-            .fillMaxSize()
             .background(color = colorResource(id = R.color.light_green))
             .safeDrawingPadding(),
     ) {
@@ -63,6 +63,7 @@ fun BusinessCard(modifier: Modifier = Modifier) {
         ContactSection(
             modifier = Modifier
                 .align(Alignment.CenterHorizontally)
+                .padding(horizontal = 16.dp)
                 .padding(bottom = 32.dp)
         )
     }
@@ -108,36 +109,40 @@ private fun ContactSection(
     Column(
         modifier = modifier,
         verticalArrangement = Arrangement.spacedBy(8.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        Column {
-            ContactRow(
-                text = stringResource(R.string.phone_number),
-                iconRes = R.drawable.phone_24dp,
-            )
-            ContactRow(
-                text = stringResource(R.string.link),
-                iconRes = R.drawable.share_24dp
-            )
-            ContactRow(
-                text = stringResource(R.string.email),
-                iconRes = R.drawable.email_24dp
-            )
-        }
+        ContactRow(
+            text = stringResource(R.string.phone_number),
+            iconDescriptor = stringResource(R.string.phone),
+            iconRes = R.drawable.phone_24dp,
+        )
+        ContactRow(
+            text = stringResource(R.string.link),
+            iconDescriptor = stringResource(R.string.social),
+            iconRes = R.drawable.share_24dp
+        )
+        ContactRow(
+            text = stringResource(R.string.email),
+            iconDescriptor = stringResource(R.string.email_label),
+            iconRes = R.drawable.email_24dp
+        )
     }
 
 }
 
 @Composable
-fun ContactRow(text: String, @DrawableRes iconRes: Int, modifier: Modifier = Modifier) {
+private fun ContactRow(
+    text: String,
+    iconDescriptor: String,
+    @DrawableRes iconRes: Int,
+    modifier: Modifier = Modifier
+) {
     Row(
-        modifier = modifier.padding(bottom = 8.dp),
-        horizontalArrangement = Arrangement.Start,
+        modifier = modifier.semantics(mergeDescendants = true) {},
         verticalAlignment = Alignment.CenterVertically,
     ) {
         Icon(
             painter = painterResource(iconRes),
-            contentDescription = text,
+            contentDescription = iconDescriptor,
             modifier = Modifier
                 .size(22.dp),
             tint = colorResource(id = R.color.green)
@@ -154,8 +159,21 @@ fun ContactRow(text: String, @DrawableRes iconRes: Int, modifier: Modifier = Mod
     showSystemUi = true
 )
 @Composable
-fun BusinessCardPreview() {
+private fun BusinessCardPreview() {
     BusinessCardTheme {
         BusinessCard()
+    }
+}
+
+@Preview(
+    widthDp = 800,
+    heightDp = 360,
+    showBackground = true,
+    showSystemUi = true
+)
+@Composable
+private fun BusinessCardLandscapePreview() {
+    BusinessCardTheme {
+        BusinessCard(modifier = Modifier.fillMaxSize())
     }
 }
