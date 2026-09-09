@@ -166,8 +166,7 @@ private fun BusinessCardPreview() {
 }
 
 @Preview(
-    widthDp = 800,
-    heightDp = 360,
+    device = "spec:width=411dp,height=891dp,dpi=420,orientation=landscape",
     showBackground = true,
     showSystemUi = true
 )
